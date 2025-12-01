@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadMitigationData() {
-    d3.csv("../data/merged_df.csv").then(function(data) {
+    d3.csv("data/merged_df.csv").then(function(data) {
         // Convert strings to numbers
         data.forEach(d => {
             d.year = +d.year;
