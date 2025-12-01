@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DS4200 Final</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <script> // Load the geospatial vis
+        fetch('numberofdisasters_heatmap.json')
+            .then(response => response.json())
+            .then(spec => vegaEmbed('#geospatial', spec));
+        fetch('seasonal_disaster_counts.json')
+            .then(response => response.json())
+            .then(spec => vegaEmbed('#facet_bars', spec));
+        fetch('seasonal_funds_allocation.json')
+            .then(response => response.json())
+            .then(spec => vegaEmbed('#boxplot', spec));
+    </script>
+</head>
+<body>
+
+    <div class="sidenav">
+        <a href="#welcome">welcome</a>
+        <a href="#introduction">introduction</a>
+        <a href="#data">data</a>
+        <a href="#geospatial-section">geospatial map</a>
+        <a href="#lineplot">mitigation overtime</a>
+        <a href="#facet_bars-section">seasonal disaster counts</a>
+        <a href="#boxplot-section">seasonal mitigation</a>
+        <a href="#sankey-section">disaster flow</a>
+        <a href="#conclusion">conclusion</a>
+    </div>
+
+    <div class="main">
+        <!-- Welcome Section -->
+        <section id="welcome" class="section">
+            <h1 style="color:white;font-size:50px;">The Geography of Disaster</h1>
+            <h2 style="color:#ececec">Understanding Federal Mitigation Investment Patterns</h2>
+            <a href="#introduction" class="learn-more">Learn More</a>
+        </section>
+
+        <!-- Introduction Section  -->
+        <section id="introduction" class="section">
+            <h2 style="color:white;font-size:40px;">Introduction</h2>
+    
+            <div class="chart-description">
+                <p>Natural disasters such as hurricanes, wildfires, and floods continue to affect communities across the United States, leaving lasting emotional, material, and economic damage. Federal mitigation funding plays a critical role in minimizing these long-term risks and restoring regional infrastructure. Our project examines national patterns in mitigation investment using interactive visualizations of data provided by the Federal Emergency Management Agency's Hazard Mitigation Grant Program (HMGP).</p>
+        
+                <p>FEMA allocates billions nationwide following major disasters, but our understanding of how this funding is truly distributed across states, disaster types, and time is limited. By examining temporal changes in funding, state-wide variation, and differences amongst disaster categories, we seek to identify which states and disaster types receive the most spending.</p>
+        
+                <p>We aim to present these patterns through interactive data visualizations which allow users to explore the geographic connections between disasters and spending over time. By revealing these trends, we can provide direction for disaster preparedness and fair recovery resource distribution. As the landscape of natural disasters continues to evolve, it's crucial we are identifying the nation's most pressing needs.</p>
+            </div>
+        </section>
+
+        <!-- Data Section  -->
+        <section id="data" class="section">
+            <h2 style="color:white;font-size:40px;">Data</h2>
+    
+            <div class="chart-description">
+                <p>Our analysis draws from FEMA's disaster declarations and mitigation project databases, spanning from 1953 to 2025. The dataset includes over 38,000 mitigation projects across all 50 states and territories, representing billions of dollars in federal disaster mitigation investment.</p>
+        
+                <p>The data encompasses various disaster types including hurricanes, floods, severe storms, fires, and more, providing a comprehensive view of federal disaster response patterns across different regions and time periods.</p>
+            </div>
+    
+            <div class="data-container">
+                <iframe src="data_summary.html" frameborder="0"></iframe>
+            </div>
+        </section>
+
+        <!-- Visualizatios -->
+        <section id="geospatial-section" class="section">
+            <h2 style="color:white;font-size:40px;">Geospatial Map</h2>
+            <div id="geospatial" style="margin-top: 20px;"></div>
+            <div class="chart-description">
+                <p>This interactive geospatial visualization reveals striking geographic disparities in federal disaster patterns across the United States. The map allows comparison between two key metrics: total disaster frequency per county and average funding per disaster.</p>
+        
+                <p>The <strong>Total Disasters view</strong> shows the Northeast, particularly New England states, experiencing the highest disaster frequency, with some counties recording over 150 declared disasters since 1953. This likely reflects the region's vulnerability to winter storms, nor'easters, and flooding events. In contrast, the <strong>Average Money Granted view</strong> highlights the Gulf Coast - Louisiana, Texas, and Florida - as recipients of the highest per-disaster funding, often exceeding $150M per disaster in some counties.</p>
+        
+                <p>This disparity suggests that while the Northeast experiences more frequent disasters, Gulf Coast events (primarily hurricanes) demand significantly higher federal investment per incident. The pattern reveals how disaster <em>severity</em> and <em>type</em> may be more important funding determinants than frequency alone. California's Central Valley and select western counties also show elevated funding, likely reflecting wildfire and earthquake mitigation costs.</p>
+        
+                <p>Notably, large swaths of the Mountain West and Great Plains remain light-colored in both views, indicating both lower disaster frequency and funding - raising questions about equitable resource distribution and preparedness in less disaster-prone regions.</p>
+            </div>
+        </section>
+
+        <section id="lineplot" class="section">
+            <h2 style="color:white;font-size:40px;">Mitigation Over Time</h2>
+
+            <div class="controls">
+                <label for="disaster-type">Filter by Disaster Type:</label>
+                <select id="disaster-type">
+                <option value="all">All Disasters</option>
+                </select>
+            </div>
+
+            <div id="chart1"></div> 
+            <div class="chart-description">
+                <p>This visualization reveals dramatic shifts in federal mitigation investment over the past three decades. The data shows three major funding spikes: 2005 (Hurricane Katrina at $172B), 2017 (Hurricanes Harvey, Irma, and Maria at $109B), and 2020 (multiple disasters including COVID-19 at $118B).</p>
+        
+                <p>Prior to 2005, mitigation funding remained relatively stable below $30B annually. Post-Katrina, we observe increased volatility and higher baseline funding levels, suggesting either more frequent severe disasters or shifts in federal disaster response policy.</p>
+        
+                <p>The sharp decline after 2020 may reflect the end of pandemic-related declarations or incomplete data for recent years, warranting further investigation.</p>
+            </div>
+        </section>
+
+        <section id="facet_bars-section" class="section">
+            <h2 style="color:white;font-size:40px;">Seasonal Disaster Counts</h2>
+            <div id="facet_bars" style="margin-top: 20px;"></div>
+            <div class="chart-description">
+                <p>This faceted visualization reveals the spread of disaster types over the four seasons. By determining the types of disasters that occur in each season, we can observe the number of disasters and notice trends in the number and kinds of disasters occuring based on the time of the year</p>
+
+                <p>Within <strong>FEMA</strong>, Fire Management is one of their main responsibilities. In order to mitigate the impact of unexpected fire-related disasters, <strong>FEMA</strong> often declares and allocates funds for a preventative controlled mass burning of an area, called a <strong>prescribed burn</strong> or a prescribed fire. The extremely high number of fire-related declarations in the Summer allows us to speculate on the number of prescribed fires occuring during the Summer. With the information from the visualization, it becomes clear that there is a disproportionate amount of hazard mitigation declarations involving fire-related disasters. </p>
+
+                <p>In addition, this visualization demonstrates the relative "danger" of the Summer, in comparison to the Winter. By comparing the height of the bars, we can determine that severe storms and flooding are the broadest types of disasters, being affected very little by the changing seasons. The only exception is the smaller amount of severe storms occuring in Autumn. This can be explained by ocean water absorbing Summer heat, in addition to a decrease in air temperature. Both of these factors support storm formation, making early Autumn peak hurricane season. This may explain the disproportionate amount of severe storms that may be turning into hurricanes.</p>
+            </div>
+        </section>
+
+        <section id="boxplot-section" class="section">
+            <h2 style="color:white;font-size:40px;">Seasonal Hazard Mitigation Funds Distribution</h2>
+            <div id="boxplot" style="margin-top: 20px;"></div>
+            <div class="chart-description">
+                <p> This visualization shows the distribution of hazard mitigation funds across the four seasons. Since the maximum amount that was declared at one time is 3 billion (Hurricane Maria in 2017), the scale is logarithmic. It is a good sign that all the median values are within ~10 million of each other as of 2025, demonstrating that <strong>FEMA</strong> is not allocating more funds during one season over another. </p>
+
+                <p> Using the maximum year slider, we can observe that before approx. 1989, there was no data for hazard mitigation funds, besides there being rows in the table associated with those dates. From the earliest snapshots of this data (around 1990's), we can observe that the first disaster to be allocated more than 100 million happened in winter in 1994. This coincides with the Northridge Earthquake in California. Overall, there is a clear upwards creep in the medians of each of the seasons. This could possibly demonstrate the affect of inflation, or the greater cost of rebuilding infrastructure as society develops and populations grow. </p>
+
+                <p> We can observe how in the past 5 years, the spread of the boxes seems to "grow", demonstrating that there have been more low/no-cost disaster declarations, especially in the summer. We note how the Q1 for the Summer is lower than the others as of 2025. This could possibly coincide with an increase in prescribed fires, as they are a low-cost and low-effort way to heavily influence the spread of fire. Less optimistically, it could further signal incomplete data for recent years. </p>
+            </div>
+        </section>
+
+        <section id="sankey-section" class="section">
+            <h2 style="color:white;font-size:40px;">Disaster Flow: Type to Region to Funding</h2>
+            <div class="sankey-container">
+                <iframe src="sankey_diagram.html" frameborder="0"></iframe>
+            </div>
+    
+            <div class="chart-description">
+                <p>This Sankey diagram visualizes the flow of federal disaster mitigation funding across three interconnected dimensions: disaster type, geographic region, and funding level. The visualization reveals a striking dominance of hurricane-related mitigation investments, with the massive turquoise flow overshadowing all other disaster categories combined. This concentration reflects the substantial economic and human costs associated with hurricane events, particularly in vulnerable coastal areas.</p>
+
+                <p>The geographic distribution of funding shows clear patterns tied to disaster exposure. Region 4 (Southeast) and Region 6 (South Central) emerge as the primary recipients of mitigation dollars, drawing heavily from hurricane-related programs. This alignment makes intuitive sense given these regions' Gulf Coast and Atlantic coastlines, where hurricane risk is most acute. Region 2 (NY/NJ) also receives considerable investment, likely reflecting both hurricane and severe storm vulnerabilities. In contrast, inland regions such as the Midwest, Central Plains, and Mountain states display more diversified disaster portfolios, though with notably smaller funding flows for individual disaster types.</p>
+
+                <p>The right side of the diagram categorizes projects by funding magnitude, revealing that medium-tier investments between $10 million and $100 million represent the most common funding level. These medium investments capture the widest variety of disaster-region combinations, suggesting FEMA's strategy balances addressing diverse risks across multiple locations. High-funding projects exceeding $100 million, while fewer in number, still represent substantial aggregate investment, likely concentrated in the most vulnerable areas or largest-scale mitigation efforts. The minimal presence of low-funding projects under $10 million indicates a federal preference for more substantial, comprehensive mitigation initiatives rather than smaller-scale interventions.</p>
+            </div>
+        </section>
+
+        <section id="conclusion" class="section">
+            <h2 style="color:white;font-size:40px;">Conclusion</h2>
+    
+            <div class="chart-description">
+                <p>Our analysis reveals several overall patterns in federal hazard mitigation spending. First, funding levels are unevenly distributed across states, with geographical location, disaster type, and intensity all influencing trends. Regions with greater frequency of disaster, such as the Northeast with winter storms and flooding, don't always receive the most funding. On the other hand, the Gulf Coast receives large amounts of funding per disaster, suggesting a surge in mitigation costs caused by tropical storms.</p>
+        
+                <p>After the early 2000's, federal mitigation funding experienced volatile changes, possibly due to changes in FEMA policy or distribution, or changes in event severity. Major disasters, like Hurricane Katrina and COVID, lead to significant spikes in funding; following Katrina, higher baseline spending was seen.</p>
+        
+                <p>Aside from changes in disaster events, disparities seen reflect limits in administrative capacity at various levels. Certain disasters receive more immediate and generous funding than others, specifically lower-income areas. Resultedly, moderate disasters in less densely populated areas may be overlooked. In the future, incorporating socioeconomic indicators can help us further identify community needs. Large scale research should be done to analyze changes resulting from shifts in climate.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="main.js"></script>    
+</body>
+</html>

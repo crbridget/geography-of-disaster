@@ -1,0 +1,239 @@
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory; /* Optional: makes scrolling snap to sections */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color:#478778;
+}
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #097969;
+  overflow-x: hidden;
+  padding-top: 5%;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 15px 40px 20px 16px;
+  text-decoration: none;
+  font-size: 30px;
+  color: #D3D3D3;
+  display: block;
+  text-align: right;
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-style: italic;
+}
+
+.sidenav a:hover {
+  color: white;
+}
+
+/* Active link in sidebar */
+.sidenav a.active {
+  color: white;
+  font-weight: bold; /* Optional: makes it stand out more */
+}
+
+/* Style page content */
+.main {
+  margin-left: 20%;
+  text-align: left;
+}
+
+/* Full-page sections */
+.section {
+  min-height: 100vh; /* Each section takes full viewport height */
+  padding: 10% 30px;
+  scroll-snap-align: start; /* Optional: for snap scrolling */
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+h2 {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+p {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.learn-more {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 16px;
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #097969;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+.learn-more:hover {
+  background-color: #0a8a7a;
+}
+
+/* vega is the library that manages altair bindings
+  Styling vega components styles the components bound to the altair visualizations
+ */
+
+.vega-embed {
+    display:flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.vega-bind {
+  background: #097969;
+  border-radius: 16px;
+  margin: 5px 10px;
+  padding: 10px 10px;
+  align-items: center;
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+/* Style the label text */
+.vega-bind-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: aliceblue;
+    margin-right: 15px;
+    padding-right: 10%
+}
+
+/* Style individual radio options */
+.vega-bind label {
+    margin-right: 20px;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+}
+
+#chart1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#chart1 svg {
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#chart1 svg text {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.chart-description {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ececec;
+}
+
+.chart-description p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.chart-description p:last-child {
+    margin-bottom: 0;
+}
+.chart-description {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 25px 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #ececec;
+    backdrop-filter: blur(5px);
+}
+
+.chart-description strong {
+    color: white;
+    font-weight: 600;
+}
+
+.chart-description em {
+    color: #d3d3d3;
+    font-style: italic;
+}
+
+.controls {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.controls label {
+    color: white;
+    font-size: 18px;
+    margin-right: 10px;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.controls select {
+    padding: 8px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #097969;
+    background-color: white;
+    cursor: pointer;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.controls select:hover {
+    border-color: #0a8a7a;
+}
+
+.sankey-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.sankey-container iframe {
+    width: 1200px;
+    height: 900px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.data-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.data-container iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+}
