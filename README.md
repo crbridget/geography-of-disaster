@@ -1,5 +1,3 @@
-# geography-of-disaster
-
 # The Geography of Disaster
 
 Interactive data visualization analyzing FEMA disaster funding patterns across the United States. This project explores the distribution of federal disaster relief funding, revealing geographic patterns, funding disparities, and trends in disaster response.
